@@ -29,9 +29,7 @@ df_muestra = df.sample(n=200000, random_state=42)
 df_muestra.to_csv('muestra_eda.csv', index=False)
 
 
-dataset_limpio.csv: Producto de la unión (Inner Join) de las fuentes originales (muestra_EDA.csv y profiles.csv= dataset_raw.csv) y la primera fase de limpieza de nulos y estandarización.
-
-dataset_analisis_final.csv: Versión utilizada para el Análisis Exploratorio de Datos (EDA) en VS Code, con columnas renombradas a español profesional.
+dataset_analisis_final.csv: Producto de la unión (Inner Join) de las fuentes originales (muestra_EDA.csv y profiles.csv) y la primera fase de limpieza de nulos y estandarización. Versión utilizada para el Análisis Exploratorio de Datos (EDA) en VS Code, con columnas renombradas a español profesional.
 
 dataset_final_powerbi.csv: Archivo definitivo optimizado con ingeniería de variables, redondeos estadísticos y codificación UTF-8-SIG para una visualización perfecta en Power BI.
 
@@ -181,7 +179,7 @@ import numpy as np
 
 ### Cargar dataset tras la unión inicial
 
-df = pd.read_csv('dataset_analisis.csv')
+df = pd.read_csv('dataset_analisis_final.csv')
 
  #### 1. Ingeniería de Ubicación
 
@@ -221,7 +219,6 @@ df['Conexiones'] = df['Conexiones'].fillna(0).astype(int)
 
 df.to_csv('dataset_final_powerbi.csv', index=False, encoding='utf-8-sig')
 
-print("✅ Pipeline completado: 'dataset_final_powerbi.csv' generado para Power BI.")
 
 
 
