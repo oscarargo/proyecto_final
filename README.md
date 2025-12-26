@@ -279,11 +279,11 @@ El análisis de la brecha de experiencia ( diferencia de años entre los perfile
 
 -La similitud en la experiencia se asocia con una mediana de compabitibilidad más alta. A medida que la brecha aunmenta, la mediana de compatibilidad tiende a disminuir. Esto sugiere que los pares con trayectorias profesionales similares tienen más facilidad para encontrar puntos en común.
 
-![compatibilidad_vs_brecha_experiencia](../eda_results/compatibilidad_vs_brecha_experiencia.png)
+![compatibilidad_vs_brecha_experiencia](eda_results/compatibilidad_vs_brecha_experiencia.png)
 
 ##### Compatibilidad por modalidad de trabajo
 - El análisis por modalidad de trabajo revela que, si bien la mediana de compatibilidad es similar entre onsite, hybrid y remote; la modalidad onsite presenta una mayor variabilidad y los outliers de mayor puntuación. 
-![alt text](../eda_results/compatibilidad_vs_modalidad_trabajo.png)
+![alt text](eda_results/compatibilidad_vs_modalidad_trabajo.png)
 
 #### Análisis cualitativo
 
@@ -298,6 +298,6 @@ Los análisis de frecuencia de las columnas de texto revelan:
 - Conclusión cualitativa: la red de perfiles analizada funciona como un ecosistema de apoyo donde los perfiles con experiencia ofrecen mentoring y referencias de contratación mientras que los perfiles en crecimiento buscan oportunidades y orientación profesional.
 
 
-![alt text](../eda_results/top_habilidades_tecnicas.png)
-![alt text](../eda_results/top_objetivos_profesionales.png)
-![alt text](../eda_results/top_necesidades_de_networking.png)
+![top_habilidades_tecnicas](eda_results/top_habilidades_tecnicas.png)
+![top_objetivos_profesionales](eda_results/top_objetivos_profesionales.png)
+![top_necesidades_de_networking](eda_results/top_necesidades_de_networking.png)
