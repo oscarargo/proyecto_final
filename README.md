@@ -262,3 +262,34 @@ Asegurar que el Dashboard se mantenga actualizado con el mínimo esfuerzo manual
 Integración de Scripts de Python: Configurar Power BI para ejecutar el pipeline de limpieza y transformación directamente sobre el dataset de origen (profiles.csv y muestra_eda.csv), automatizando el ETL en cada actualización del reporte.
 
 Alertas de Datos: Configurar umbrales de rendimiento para notificar cambios significativos en las tendencias de networking o caídas en la calidad de los perfiles entrantes.
+
+
+
+
+### ANEXO ( Resultados EDA)
+
+Tras realizarse un análisis general de la información, se ha procedido a realizar un estudio ligeramente más exhaustivo de la información para ello y tras investigar en una hoja de jupyter notebook se ha decidido incluir información complementaria.
+
+##### Análisis bivariado y segmentación
+###### Experiencia y conexiones
+el gráfico de regresión entre años de experiencia y conexiones muestra una correlación positiva clara. A mayor experiencia, mayor es el volumen de la red (conexiones). Esto valida la premisa de que la red profesional crece con el tiempo.
+
+###### Impacto de la brecha de experiencia.
+El análisis de la brecha de experiencia ( diferencia de años entre los perfiles) es crucial: 
+
+-La similitud en la experiencia se asocia con una mediana de compabitibilidad más alta. A medida que la brecha aunmenta, la mediana de compatibilidad tiende a disminuir. Esto sugiere que los pares con trayectorias profesionales similares tienen más facilidad para encontrar puntos en común.
+
+##### Compatibilidad por modalidad de trabajo
+- El análisis por modalidad de trabajo revela que, si bien la mediana de compatibilidad es similar entre onsite, hybrid y remote; la modalidad onsite presenta una mayor variabilidad y los outliers de mayor puntuación. 
+
+#### Análisis cualitativo
+
+Los análisis de frecuencia de las columnas de texto revelan:
+
+- Una fuerte inclinación hacia perfiles tecnológicos con una base de programación fundamental y enfoque en análisis de datos ( programación C, data science, numpy...)
+
+- Equilibrio entre el deseo de maestría técnica y ambición de liderazgo ( palabras como specialize, learn new skills, executive position...)
+
+- Los perfiles buscan activamente orientación y oportunidades ( carrer guidance, business advice, hiring...)
+
+- Conclusión cualitativa: la red de perfiles analizada funciona como un ecosistema de apoyo donde los perfiles con experiencia ofrecen mentoring y referencias de contratación mientras que los perfiles en crecimiento buscan oportunidades y orientación profesional.
