@@ -1,6 +1,6 @@
 # proyecto_final
 
-Este es un borrador
+Este es un borrador. Los datos se han extraído de: https://www.kaggle.com/datasets/likithagedipudi/linkedin-compatibility-dataset-50k-profiles
 
 Análisis de Conectividad y Compatibilidad Profesional
 📌 Descripción del Proyecto
