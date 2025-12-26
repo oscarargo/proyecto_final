@@ -171,7 +171,7 @@ Nivel Executive: Presenta la mayor dispersión, indicando que en la alta direcci
 El hallazgo más técnico confirma que la compatibilidad total está impulsada por el Valor de Red (0.60) y las Habilidades (0.56), mientras que el Puntaje Geográfico (0.21) es el factor menos relevante.
 
 Insight: En este ecosistema, lo que sabes pesa tres veces más que dónde vives.
-![alt text](distribucion_compatibilidad.png)
+![alt text](matriz_correlacion.png)
 
 
 ## 💻 Código de Generación del Dataset Final
@@ -180,31 +180,45 @@ import pandas as pd
 import numpy as np
 
 ### Cargar dataset tras la unión inicial
+
 df = pd.read_csv('dataset_analisis.csv')
 
  #### 1. Ingeniería de Ubicación
+
 df['Estado_Provincia'] = df['Ubicación'].apply(
     lambda x: x.split(',')[-1].strip() if ',' in str(x) else 'No Especificado'
 )
 
  #### 2. Refinamiento de Habilidades y Conteo
+'
 df['Habilidades Técnicas'] = df['Habilidades Técnicas'].astype(str).str.replace(r"[\[\]']", "", regex=True).str.strip()
+
 df['Cantidad_Habilidades'] = df['Habilidades Técnicas'].apply(
     lambda x: len(x.split(',')) if x != 'nan' and x != '' else 0
 )
 
 #### 3. Normalización Numérica y Tipos
+
+
 cols_score = [
+
     'Puntuación de Coincidencia de Habilidades', 
+
     'Puntuación de Complementariedad de Habilidades',
+
     'Puntaje de Alineación de Carrera',
+
     'Índice de Compatibilidad Total',
+
     'Puntaje Geográfico'
+
 ]
 df[cols_score] = df[cols_score].round(2)
+
 df['Conexiones'] = df['Conexiones'].fillna(0).astype(int)
 
 #### 4. Exportación Final para Power BI
+
 df.to_csv('dataset_final_powerbi.csv', index=False, encoding='utf-8-sig')
 
 print("✅ Pipeline completado: 'dataset_final_powerbi.csv' generado para Power BI.")
