@@ -272,15 +272,18 @@ Tras realizarse un análisis general de la información, se ha procedido a reali
 
 ##### Análisis bivariado y segmentación
 ###### Experiencia y conexiones
-el gráfico de regresión entre años de experiencia y conexiones muestra una correlación positiva clara. A mayor experiencia, mayor es el volumen de la red (conexiones). Esto valida la premisa de que la red profesional crece con el tiempo.
+El gráfico de regresión entre años de experiencia y conexiones muestra una correlación positiva clara. A mayor experiencia, mayor es el volumen de la red (conexiones). Esto valida la premisa de que la red profesional crece con el tiempo.
 
 ###### Impacto de la brecha de experiencia.
 El análisis de la brecha de experiencia ( diferencia de años entre los perfiles) es crucial: 
 
 -La similitud en la experiencia se asocia con una mediana de compabitibilidad más alta. A medida que la brecha aunmenta, la mediana de compatibilidad tiende a disminuir. Esto sugiere que los pares con trayectorias profesionales similares tienen más facilidad para encontrar puntos en común.
 
+![alt text](../eda_results/compatibilidad_vs_brecha_experiencia.png)
+
 ##### Compatibilidad por modalidad de trabajo
 - El análisis por modalidad de trabajo revela que, si bien la mediana de compatibilidad es similar entre onsite, hybrid y remote; la modalidad onsite presenta una mayor variabilidad y los outliers de mayor puntuación. 
+![alt text](../eda_results/compatibilidad_vs_modalidad_trabajo.png)
 
 #### Análisis cualitativo
 
@@ -293,3 +296,8 @@ Los análisis de frecuencia de las columnas de texto revelan:
 - Los perfiles buscan activamente orientación y oportunidades ( carrer guidance, business advice, hiring...)
 
 - Conclusión cualitativa: la red de perfiles analizada funciona como un ecosistema de apoyo donde los perfiles con experiencia ofrecen mentoring y referencias de contratación mientras que los perfiles en crecimiento buscan oportunidades y orientación profesional.
+
+
+![alt text](../eda_results/top_habilidades_tecnicas.png)
+![alt text](../eda_results/top_objetivos_profesionales.png)
+![alt text](../eda_results/top_necesidades_de_networking.png)
