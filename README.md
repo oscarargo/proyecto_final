@@ -142,7 +142,7 @@ Recomendación: En Power BI, utilice siempre DISTINCTCOUNT sobre profile_id para
 #### A. Distribución de Densidad (KDE)
 Al observar la compatibilidad, se detectó una media de 36.66 frente a una mediana de 35.80. El ligero sesgo a la derecha indica que, aunque la mayoría de las conexiones son de afinidad media, existe un grupo selecto de "parejas profesionales perfectas" (Score > 50) que actúan como el motor de la red.
 
-![alt text](distribucion_compatibilidad.png)
+![alt text](../eda_results/distribucion_compatibilidad.png)
 
 
 #### B. Relación Lineal (Experiencia vs. Red)
