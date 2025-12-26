@@ -154,7 +154,7 @@ Hitos: Se observan "escalones" de crecimiento a los 2, 7 y 15 años.
 
 Saturación: La red tiende a estabilizarse al alcanzar las 5,000 conexiones, punto crítico para identificar a los Top Connectors.
 
-![alt text](experiencia_vs_conexiones.png)
+![Experiencia vs Conexiones](eda_results/experiencia_vs_conexiones.png)
 
 #### C. Variabilidad por Seniority (Boxplots)
 El análisis de cajas revela que la compatibilidad no es estática:
@@ -163,13 +163,13 @@ Entry a Senior: El índice medio sube consistentemente.
 
 Nivel Executive: Presenta la mayor dispersión, indicando que en la alta dirección, la compatibilidad es de nicho: altamente exitosa o nula.
 
-![alt text](boxplot_seniority.png)
+![boxplot_seniority](eda_results/boxplot_seniority.png)
 
 #### D. Mapa de Calor (Interdependencia)
 El hallazgo más técnico confirma que la compatibilidad total está impulsada por el Valor de Red (0.60) y las Habilidades (0.56), mientras que el Puntaje Geográfico (0.21) es el factor menos relevante.
 
 Insight: En este ecosistema, lo que sabes pesa tres veces más que dónde vives.
-![alt text](matriz_correlacion.png)
+![matriz_correlacion](eda_results/matriz_correlacion.png)
 
 
 ## 💻 Código de Generación del Dataset Final
@@ -279,7 +279,7 @@ El análisis de la brecha de experiencia ( diferencia de años entre los perfile
 
 -La similitud en la experiencia se asocia con una mediana de compabitibilidad más alta. A medida que la brecha aunmenta, la mediana de compatibilidad tiende a disminuir. Esto sugiere que los pares con trayectorias profesionales similares tienen más facilidad para encontrar puntos en común.
 
-![alt text](../eda_results/compatibilidad_vs_brecha_experiencia.png)
+![compatibilidad_vs_brecha_experiencia](../eda_results/compatibilidad_vs_brecha_experiencia.png)
 
 ##### Compatibilidad por modalidad de trabajo
 - El análisis por modalidad de trabajo revela que, si bien la mediana de compatibilidad es similar entre onsite, hybrid y remote; la modalidad onsite presenta una mayor variabilidad y los outliers de mayor puntuación. 
