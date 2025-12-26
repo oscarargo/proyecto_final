@@ -14,6 +14,24 @@ Registros de Interacción: 200,000 filas (pares de compatibilidad).
 
 Dimensiones Finales: 34 columnas tras el proceso de unificación y limpieza.
 
+#### 📂 Evolución y Gestión de Archivos
+A lo largo del proyecto, los datos han transitado por distintas etapas de madurez para garantizar la trazabilidad y la integridad de la información:
+
+compatibility_pairs.csv: archivo original de 1.1GB de tamaño que contiene millones de datos para corroborar con profiles.csv
+profiles.csv: Dataset original con la información biográfica bruta de 50,000 usuarios.
+
+muestra_eda.csv: Registro de 200,000 interacciones y métricas de compatibilidad entre pares de perfiles, creado a partir de compatibility_pairs.csv
+df = pd.read_csv('compatibility_pairs.csv')
+ Tomar una muestra aleatoria de 200,000 filas
+df_muestra = df.sample(n=200000, random_state=42)
+df_muestra.to_csv('muestra_eda.csv', index=False)
+
+dataset_limpio_final.csv: Producto de la unión (Inner Join) de las fuentes originales (muestra_EDA.csv y profiles.csv) y la primera fase de limpieza de nulos y estandarización.
+
+dataset_analisis.csv: Versión utilizada para el Análisis Exploratorio de Datos (EDA) en VS Code, con columnas renombradas a español profesional.
+
+dataset_final_powerbi.csv: Archivo definitivo optimizado con ingeniería de variables, redondeos estadísticos y codificación UTF-8-SIG para una visualización perfecta en Power BI.
+
 ## 🛠️ Metodología de Procesamiento
 #### 1. Integración de Datos (Data Merging)
 El corazón del análisis reside en la naturaleza relacional del dataset. Se unificaron dos fuentes principales:
@@ -38,6 +56,42 @@ Ingeniería de Características: * Estado/Provincia: Extracción mediante funcio
 Cantidad_Habilidades: Nueva métrica numérica para cuantificar la versatilidad del perfil.
 
 Rango de Experiencia: Segmentación categórica (Junior, Mid, Senior, Executive).
+
+Antes de crear el archivo dataset_analisis.csv lo que se hizo fue traducir las columnas para una mejor interpretación de los gráficos y de cara a facilitar el tratamiento de los datos en Power BI
+    'skill_match_score': 'Puntuación de Coincidencia de Habilidades',
+    'skill_complementarity_score': 'Puntuación de Complementariedad de Habilidades',
+    'network_value_a_to_b': 'Valor de Red A hacia B',
+    'network_value_b_to_a': 'Valor de Red B hacia a A',
+    'career_alignment_score': 'Puntaje de Alineación de Carrera',
+    'experience_gap': 'Brecha de Experiencia',
+    'industry_match': 'Coincidencia de Industria',
+    'geographic_score': 'Puntaje Geográfico',
+    'seniority_match': 'Coincidencia de Seniority',
+    'compatibility_score': 'Índice de Compatibilidad Total',
+    'mutual_benefit_explanation': 'Explicación de Beneficio Mutuo',
+    'pair_id': 'ID de Pareja',
+    'profile_a_id': 'ID de Perfil A',
+    'profile_b_id': 'ID de Perfil B',
+    'email': 'Correo Electrónico',
+    'headline': 'Titular Profesional',
+    'about': 'Extracto / Acerca de',
+    'current_role': 'Cargo Actual',
+    'experience': 'Historial de Experiencia',
+    'education': 'Educación / Formación',
+    'source': 'Fuente de Origen',
+    'name': 'Nombre Completo',
+    'industry': 'Industria',
+    'location': 'Ubicación',
+    'current_company': 'Empresa Actual',
+    'seniority_level': 'Nivel de Seniority',
+    'years_experience': 'Años de Experiencia',
+    'skills': 'Habilidades Técnicas',
+    'goals': 'Objetivos Profesionales',
+    'needs': 'Necesidades de Networking',
+    'can_offer': 'Propuesta de Valor',
+    'remote_preference': 'Modalidad de Trabajo',
+    'connections': 'Conexiones',
+    'exp_range' : 'Rango de Experiencia'
 
 ### ⚠️ Nota de Integridad: El Fenómeno de Duplicidad Relacional
 Es crucial entender que el dataset presenta nombres repetidos (ej. "David Smith"). Esto no representa un error de carga, sino que responde a:
