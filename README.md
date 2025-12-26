@@ -29,9 +29,9 @@ df_muestra = df.sample(n=200000, random_state=42)
 df_muestra.to_csv('muestra_eda.csv', index=False)
 
 
-dataset_limpio_final.csv: Producto de la unión (Inner Join) de las fuentes originales (muestra_EDA.csv y profiles.csv) y la primera fase de limpieza de nulos y estandarización.
+dataset_limpio.csv: Producto de la unión (Inner Join) de las fuentes originales (muestra_EDA.csv y profiles.csv= dataset_raw.csv) y la primera fase de limpieza de nulos y estandarización.
 
-dataset_analisis.csv: Versión utilizada para el Análisis Exploratorio de Datos (EDA) en VS Code, con columnas renombradas a español profesional.
+dataset_analisis_final.csv: Versión utilizada para el Análisis Exploratorio de Datos (EDA) en VS Code, con columnas renombradas a español profesional.
 
 dataset_final_powerbi.csv: Archivo definitivo optimizado con ingeniería de variables, redondeos estadísticos y codificación UTF-8-SIG para una visualización perfecta en Power BI.
 
@@ -83,7 +83,7 @@ Antes de crear el archivo dataset_analisis.csv lo que se hizo fue traducir las c
     'compatibility_score': 'Índice de Compatibilidad Total',
 
     'mutual_benefit_explanation': 'Explicación de Beneficio Mutuo',
-    
+
     'pair_id': 'ID de Pareja',
 
     'profile_a_id': 'ID de Perfil A',
@@ -144,6 +144,9 @@ Recomendación: En Power BI, utilice siempre DISTINCTCOUNT sobre profile_id para
 #### A. Distribución de Densidad (KDE)
 Al observar la compatibilidad, se detectó una media de 36.66 frente a una mediana de 35.80. El ligero sesgo a la derecha indica que, aunque la mayoría de las conexiones son de afinidad media, existe un grupo selecto de "parejas profesionales perfectas" (Score > 50) que actúan como el motor de la red.
 
+![alt text](distribucion_compatibilidad.png)
+
+
 #### B. Relación Lineal (Experiencia vs. Red)
 Se validó la hipótesis: "A mayor experiencia, mayor capital social".
 
@@ -153,6 +156,8 @@ Hitos: Se observan "escalones" de crecimiento a los 2, 7 y 15 años.
 
 Saturación: La red tiende a estabilizarse al alcanzar las 5,000 conexiones, punto crítico para identificar a los Top Connectors.
 
+![alt text](experiencia_vs_conexiones.png)
+
 #### C. Variabilidad por Seniority (Boxplots)
 El análisis de cajas revela que la compatibilidad no es estática:
 
@@ -160,10 +165,14 @@ Entry a Senior: El índice medio sube consistentemente.
 
 Nivel Executive: Presenta la mayor dispersión, indicando que en la alta dirección, la compatibilidad es de nicho: altamente exitosa o nula.
 
+![alt text](boxplot_seniority.png)
+
 #### D. Mapa de Calor (Interdependencia)
 El hallazgo más técnico confirma que la compatibilidad total está impulsada por el Valor de Red (0.60) y las Habilidades (0.56), mientras que el Puntaje Geográfico (0.21) es el factor menos relevante.
 
 Insight: En este ecosistema, lo que sabes pesa tres veces más que dónde vives.
+![alt text](distribucion_compatibilidad.png)
+
 
 ## 💻 Código de Generación del Dataset Final
 Este script en Python consolida todas las transformaciones anteriores para generar el archivo listo para producción del POWER BI.
