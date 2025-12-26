@@ -1,134 +1,152 @@
-# proyecto_final
+LinkedIn Professional Compatibility & Connectivity Analysis
 
-Este es un borrador. Los datos se han extraído de: https://www.kaggle.com/datasets/likithagedipudi/linkedin-compatibility-dataset-50k-profiles
+ Los datos se han extraído de: https://www.kaggle.com/datasets/likithagedipudi/linkedin-compatibility-dataset-50k-profiles
 
-Análisis de Conectividad y Compatibilidad Profesional
-📌 Descripción del Proyecto
-Este proyecto consiste en un Análisis Exploratorio de Datos (EDA) sobre un dataset de red profesional que contiene perfiles de usuarios y métricas de compatibilidad entre ellos. El objetivo final es la creación de un Dashboard interactivo en Power BI para identificar patrones de networking, brechas de habilidades y oportunidades de mentoría.
-📊 Especificaciones Técnicas
-El dataset final cumple con los requisitos mínimos establecidos para el proyecto:
-    • Registros totales: 200,000 filas.
-    • Atributos (Columnas): 33 columnas tras la limpieza y unificación.
+
+Este proyecto presenta un Análisis Exploratorio de Datos (EDA) avanzado y un pipeline de Ingeniería de Datos aplicado a un dataset de redes profesionales de LinkedIn. El objetivo es desglosar las métricas de compatibilidad entre usuarios para identificar patrones de networking, brechas de habilidades y oportunidades estratégicas de mentoría, culminando en un entorno de visualización interactivo en Power BI.
+
+📊 Especificaciones Técnicas y Origen
+Los datos han sido obtenidos del LinkedIn Compatibility Dataset (50k profiles).
+
+Entidades Únicas: 50,000 perfiles biográficos.
+
+Registros de Interacción: 200,000 filas (pares de compatibilidad).
+
+Dimensiones Finales: 34 columnas tras el proceso de unificación y limpieza.
 
 🛠️ Metodología de Procesamiento
 1. Integración de Datos (Data Merging)
-Se utilizaron dos fuentes de datos principales:
-    • profiles.csv: Información biográfica y profesional de 50,000 usuarios únicos.
-    • muestra_eda.csv: Registro de 200,000 interacciones o "matches" entre usuarios.
-Se realizó un Inner Join utilizando la llave profile_a_id (de la muestra) y profile_id (de los perfiles) para enriquecer cada interacción con los datos del usuario correspondiente.
-2. Limpieza Exhaustiva
-Se aplicó un pipeline de limpieza en Python para asegurar la calidad en Power BI:
-    • Normalización: Estandarización de textos en columnas como name e industry.
-    • Tratamiento de Listas: Limpieza de caracteres especiales en columnas de skills, goals y needs.
-    • Imputación de Nulos: Los valores faltantes en experiencia se trataron con la mediana, y las categorías vacías se marcaron como "Not Specified".
-    • Optimización de Tipos: Ajuste de formatos numéricos para mejorar el rendimiento del reporte.
+El corazón del análisis reside en la naturaleza relacional del dataset. Se unificaron dos fuentes principales:
 
-⚠️ Nota sobre la Integridad de los Datos: Duplicados de Nombre
-Durante el análisis, se identificó una alta frecuencia de nombres repetidos (ej. "David Smith" aparece 121 veces). Es fundamental aclarar que estos no son errores de duplicidad, sino que responden a dos fenómenos válidos:
-    1. Naturaleza Relacional: El dataset registra emparejamientos. Una persona única aparece múltiples veces porque se está evaluando su compatibilidad con diferentes perfiles. Cada fila representa una relación distinta, no un usuario repetido.
-    2. Homónimos Reales: En una base de datos de 50,000 personas, existen individuos distintos con el mismo nombre pero diferentes IDs únicos (profile_id).
-Recomendación de Uso: Para obtener métricas de personas únicas en el Dashboard, se debe utilizar la función DISTINCTCOUNT sobre la columna profile_id en lugar de contar los nombres directamente.
+profiles.csv: Contiene el ADN profesional (educación, industria, experiencia).
 
-A. Distribución del Talento
-El análisis muestra cómo se distribuyen los 50,000 perfiles. Si la mediana de "Años de Experiencia" es menor a la media, tienes una base joven con algunos perfiles expertos muy destacados. Esto justifica la creación de la columna Rango de Experiencia para segmentar el Dashboard.
+muestra_eda.csv: Registra las métricas de afinidad (scores) entre pares de usuarios.
 
-B. Análisis de los Scores de Red
-Alineación de Carrera: Este valor indica qué tan parecidos son los caminos profesionales de los usuarios comparados.
+Se ejecutó un Inner Join utilizando profile_a_id como llave relacional. Este proceso transforma una lista estática de perfiles en una red dinámica de interacciones profesionales.
 
-Complementariedad de Habilidades: Un puntaje alto aquí sugiere que el dataset es ideal para escenarios de Mentoría, donde uno tiene lo que el otro necesita.
+2. Pipeline de Limpieza y Refinamiento (ETL)
+Se implementó un pipeline robusto en Python (Pandas) diseñado para la optimización en Power BI:
 
-C. Matriz de Correlación
-Este es el hallazgo más técnico. En el README, indica cuál de los scores (Habilidades, Geográfico o Carrera) tiene el coeficiente más cercano a 1.0. Esa es la variable que "mueve la aguja" en la compatibilidad de tu modelo.
+Normalización Textual: Estandarización de nombres e industrias a formato Title Case para una estética profesional en reportes.
 
-3. Resumen de Calidad de Datos
-Para cerrar tu proceso, es importante mencionar en el README que:
+Desestructuración de Listas: Uso de expresiones regulares (Regex) para limpiar columnas como skills y goals, que originalmente contenían formatos de lista de Python (['Skill1', 'Skill2']), convirtiéndolas en texto plano delimitado.
 
-Integridad: El dataset final cuenta con 0 nulos en las métricas clave.
+Imputación de Nulos: Los valores faltantes en "Años de Experiencia" se trataron con la mediana para evitar sesgos por outliers, mientras que las categorías vacías se normalizaron como "Not Specified".
 
-Normalización: Los nombres han sido traducidos y estandarizados para facilitar el consumo por usuarios no técnicos en Power BI.
+Ingeniería de Características: * Estado/Provincia: Extracción mediante funciones lambda del campo de ubicación.
 
-Histograma con KDE (Densidad):
+Cantidad_Habilidades: Nueva métrica numérica para cuantificar la versatilidad del perfil.
 
-Objetivo: Detectar si los perfiles están concentrados en una puntuación "media" o si hay una polarización (muchos perfiles con 0 y muchos con 100).
+Rango de Experiencia: Segmentación categórica (Junior, Mid, Senior, Executive).
 
-Rigor: Si la media y la mediana están muy separadas, el dataset tiene un sesgo que debemos reportar.
+⚠️ Nota de Integridad: El Fenómeno de Duplicidad Relacional
+Es crucial entender que el dataset presenta nombres repetidos (ej. "David Smith"). Esto no representa un error de carga, sino que responde a:
 
-Scatter Plot con Línea de Regresión:
+Naturaleza Relacional: Un usuario único aparece múltiples veces porque se evalúa su compatibilidad con diferentes perfiles. Cada fila es una relación, no un registro de identidad.
 
-Objetivo: Validar la hipótesis: "A mayor experiencia, mayor red de contactos".
+Homónimos Reales: En una muestra de 50,000 personas, existen IDs únicos distintos para nombres idénticos.
 
-Rigor: La pendiente de la línea roja nos dirá qué tan fuerte es este crecimiento profesional en la muestra.
+Recomendación: En Power BI, utilice siempre DISTINCTCOUNT sobre profile_id para métricas de volumen poblacional.
 
-Boxplot (Diagrama de Caja y Bigotes):
+📈 Análisis Exploratorio (EDA) y Visualizaciones Críticas
+A. Distribución de Densidad (KDE)
+Al observar la compatibilidad, se detectó una media de 36.66 frente a una mediana de 35.80. El ligero sesgo a la derecha indica que, aunque la mayoría de las conexiones son de afinidad media, existe un grupo selecto de "parejas profesionales perfectas" (Score > 50) que actúan como el motor de la red.
 
-Objetivo: Identificar el rango intercuartílico.
+B. Relación Lineal (Experiencia vs. Red)
+Se validó la hipótesis: "A mayor experiencia, mayor capital social".
 
-Rigor: Nos permite ver los outliers (puntos aislados). Si un Junior tiene compatibilidad de Senior, es un perfil excepcional que Power BI debe destacar.
+Correlación: 0.87.
 
-Heatmap (Mapa de Calor):
+Hitos: Se observan "escalones" de crecimiento a los 2, 7 y 15 años.
 
-Objetivo: Evitar la multicolinealidad.
+Saturación: La red tiende a estabilizarse al alcanzar las 5,000 conexiones, punto crítico para identificar a los Top Connectors.
 
-Rigor: Si dos variables tienen una correlación de 0.99, son redundantes. Esto nos ayuda a simplificar el modelo para el Dashboard.
+C. Variabilidad por Seniority (Boxplots)
+El análisis de cajas revela que la compatibilidad no es estática:
 
-1. Análisis de Densidad y Tendencia Central
-Al observar la Distribución de la Compatibilidad, vemos una curva con un ligero sesgo a la derecha:
+Entry a Senior: El índice medio sube consistentemente.
 
-Media (36.66) vs. Mediana (35.80): La cercanía de ambos valores indica que el dataset es bastante estable, pero la media está siendo "arrastrada" por perfiles de alta compatibilidad (puntuaciones superiores a 50).
+Nivel Executive: Presenta la mayor dispersión, indicando que en la alta dirección, la compatibilidad es de nicho: altamente exitosa o nula.
 
-Interpretación: El grueso de los usuarios tiene una compatibilidad de nivel medio-bajo. En Power BI, esto sugiere que encontrar una "pareja profesional perfecta" (puntuación > 50) es un evento poco común, lo que añade valor a tu algoritmo de búsqueda.
+D. Mapa de Calor (Interdependencia)
+El hallazgo más técnico confirma que la compatibilidad total está impulsada por el Valor de Red (0.60) y las Habilidades (0.56), mientras que el Puntaje Geográfico (0.21) es el factor menos relevante.
 
-2. Correlaciones Críticas (El motor del sistema)
-Tu Mapa de Calor revela relaciones matemáticas fundamentales:
+Insight: En este ecosistema, lo que sabes pesa tres veces más que dónde vives.
 
-Factor Dominante: Los Años de Experiencia y las Conexiones tienen una correlación altísima de 0.87. Esto confirma que la red en este dataset crece de forma orgánica y robusta con la carrera profesional.
+💻 Código de Generación del Dataset Final
+Este script en Python consolida todas las transformaciones anteriores para generar el archivo listo para producción del POWER BI.
+import pandas as pd
+import numpy as np
 
-Impacto en la Compatibilidad: El Índice de Compatibilidad Total está impulsado principalmente por el Valor de Red (0.60) y la Puntuación de Coincidencia de Habilidades (0.56).
+# Cargar dataset tras la unión inicial
+df = pd.read_csv('dataset_analisis.csv')
 
-Insight Riguroso: La ubicación geográfica (Puntaje Geográfico) tiene una correlación de 0.21, lo que significa que en este ecosistema, lo que sabes y a quién conoces pesa casi tres veces más que dónde vives.
+# 1. Ingeniería de Ubicación
+df['Estado_Provincia'] = df['Ubicación'].apply(
+    lambda x: x.split(',')[-1].strip() if ',' in str(x) else 'No Especificado'
+)
 
-3. El Salto Profesional (Experiencia vs. Red)
-El gráfico de Relación Lineal muestra un patrón muy interesante:
+# 2. Refinamiento de Habilidades y Conteo
+df['Habilidades Técnicas'] = df['Habilidades Técnicas'].astype(str).str.replace(r"[\[\]']", "", regex=True).str.strip()
+df['Cantidad_Habilidades'] = df['Habilidades Técnicas'].apply(
+    lambda x: len(x.split(',')) if x != 'nan' and x != '' else 0
+)
 
-Comportamiento por tramos: Se observan "escalones" claros en el volumen de conexiones a los 2, 7, 15 y 30 años de experiencia.
+# 3. Normalización Numérica y Tipos
+cols_score = [
+    'Puntuación de Coincidencia de Habilidades', 
+    'Puntuación de Complementariedad de Habilidades',
+    'Puntaje de Alineación de Carrera',
+    'Índice de Compatibilidad Total',
+    'Puntaje Geográfico'
+]
+df[cols_score] = df[cols_score].round(2)
+df['Conexiones'] = df['Conexiones'].fillna(0).astype(int)
 
-Techo de Red: Existe una clara saturación de conexiones (el límite de 5000) que muchos perfiles alcanzan a partir de los 15 años de experiencia. Esto es un dato vital para segmentar perfiles "Top Connectors".
+# 4. Exportación Final para Power BI
+df.to_csv('dataset_final_powerbi.csv', index=False, encoding='utf-8-sig')
 
-4. Variabilidad por Seniority (Boxplots)
-Este gráfico es el que más "limpieza" visual aporta:
-
-Aumento de la mediana: A medida que subimos de entry a senior, el índice de compatibilidad sube consistentemente.
-
-El fenómeno "Executive": Los perfiles ejecutivos muestran la mayor dispersión (la caja es más grande). Esto indica que en niveles altos, las compatibilidades son extremas: o son muy altas o muy bajas, sin mucho término medio.
-
-Outliers: Hay muchos perfiles de nivel entry y mid que tienen compatibilidades muy por encima de su promedio (puntos negros), lo que indica "talento emergente" con un potencial de networking superior a su rango actual.
-
-5. Concentración Industrial
-Tu gráfico de barras muestra un equilibrio casi perfecto entre sectores:
-
-Industria Líder: Consulting destaca ligeramente sobre las demás.
-
-Uniformidad: El hecho de que todas las industrias (Education, Healthcare, Finance, etc.) tengan volúmenes similares (alrededor de 14,000 perfiles) indica que el dataset es robusto y no está sesgado hacia un solo nicho, lo que da validez universal a tus conclusiones.
+print("✅ Pipeline completado: 'dataset_final_powerbi.csv' generado para Power BI.")
 
 
-COnclusiones 
 
-Tras procesar una muestra de 50,000 perfiles y analizar las interdependencias entre variables de carrera, networking y compatibilidad, se extraen las siguientes conclusiones clave:
+🚀 Conclusiones Finales
+Crecimiento Orgánico: El networking es una función acumulativa de la trayectoria profesional (Corr 0.87).
 
-1. El Motor de la Red: Experiencia y Capital Social
-Correlación Determinante: Se identificó una correlación positiva muy fuerte (0.87) entre los Años de Experiencia y el Número de Conexiones. Esto indica que la red de contactos en este ecosistema no es azarosa, sino que se construye de forma acumulativa y orgánica conforme avanza la carrera profesional.
+Estructura Equilibrada: El dataset presenta una uniformidad industrial (Consultoría, Finanzas, Salud, etc.), lo que otorga validez universal a las métricas de compatibilidad.
 
-Hitos de Crecimiento: El volumen de red presenta "saltos" críticos en etapas de transición (2, 7 y 15 años), lo que sugiere periodos de expansión profesional acelerada.
+Potencial de Mentoría: El alto score en Complementariedad de Habilidades valida que el dataset es un terreno fértil para identificar mentores expertos para perfiles Entry con habilidades específicas.
 
-2. Jerarquía y Eficacia del Matching
-Progresión de Compatibilidad: El análisis de Boxplots confirma que el Índice de Compatibilidad Total aumenta proporcionalmente con el nivel de seniority. Los perfiles de nivel Senior no solo tienen más contactos, sino que su afinidad con el ecosistema es más alta y estable.
+Aquí tienes la sección de "Próximos Pasos" diseñada específicamente para ser integrada en tu archivo README.md. Esta sección explica cómo evolucionar el proyecto desde un análisis descriptivo hacia una herramienta de inteligencia de negocios avanzada dentro de Power BI.
 
-Dispersión en Niveles Ejecutivos: Se observó que los perfiles de nivel Executive presentan la mayor variabilidad. Esto sugiere que a niveles de alta dirección, la compatibilidad es altamente especializada: los matches son excepcionales o nulos, sin una zona media clara.
+🚀 Próximos Pasos: Evolución y Escalabilidad en Power BI
+Para transformar este análisis estático en una herramienta de soporte de decisiones dinámica, se proponen las siguientes líneas de desarrollo futuro dentro del entorno de Business Intelligence:
 
-3. Factores de Peso en la Compatibilidad
-Habilidades vs. Geografía: El éxito de una conexión está impulsado principalmente por el Valor de Red (0.60) y la Coincidencia de Habilidades (0.56). Por el contrario, la ubicación geográfica mostró una influencia menor (0.21).
+1. Implementación de Inteligencia DAX (Data Analysis Expressions)
+El objetivo es transicionar de columnas estáticas a cálculos dinámicos que respondan a la interacción del usuario en tiempo real:
 
-Insight: En el mercado laboral analizado, el "qué sabes" y el "a quién conoces" son factores tres veces más potentes para generar compatibilidad que el "dónde estás ubicado".
+KPIs Dinámicos: Desarrollar medidas para calcular el Índice de Compatibilidad Total promedio según filtros de industria, nivel de seniority o región geográfica.
 
-4. Estructura Industrial Equilibrada
-Consistencia de Datos: El dataset muestra una distribución equitativa entre 10 sectores principales, con una ligera predominancia de Consulting. Esta uniformidad garantiza que las conclusiones obtenidas son transversales y aplicables a múltiples industrias sin sesgos sectoriales significativos.
+Rankings de Talento (Top N): Implementar funciones de ranking para identificar automáticamente a los perfiles con mayor potencial de "match" dentro de segmentos específicos de la red.
+
+Ratios de Especialización: Crear métricas que relacionen la Cantidad de Habilidades con la experiencia para identificar perfiles altamente versátiles en sectores de nicho.
+
+2. Análisis de Escenarios mediante Parámetros "What-If"
+Habilitar la capacidad de simulación para que el usuario pueda ajustar el peso de las variables en el score final:
+
+Simulador de Prioridades: Permitir que el reclutador ajuste mediante deslizadores (sliders) qué factor es más relevante (ej. dar 80% de peso a Habilidades y 20% a Geografía) y ver cómo se reconfigura el mapa de compatibilidad instantáneamente.
+
+
+3. Storytelling y Visualización Avanzada
+Optimizar la experiencia de usuario (UX) para facilitar la extracción de hallazgos:
+
+Análisis de Cuadrantes: Implementar gráficos de dispersión que comparen Años de Experiencia vs. Conexiones, dividiendo la visualización en cuadrantes para detectar líderes de red, mentores potenciales y talento emergente.
+
+Tooltips Cualitativos: Integrar ventanas emergentes que muestren la Explicación de Beneficio Mutuo al pasar el cursor sobre una relación profesional, aportando el contexto que los números no muestran por sí solos.
+
+4. Automatización del Pipeline de Datos
+Asegurar que el Dashboard se mantenga actualizado con el mínimo esfuerzo manual:
+
+Integración de Scripts de Python: Configurar Power BI para ejecutar el pipeline de limpieza y transformación directamente sobre el dataset de origen (profiles.csv y muestra_eda.csv), automatizando el ETL en cada actualización del reporte.
+
+Alertas de Datos: Configurar umbrales de rendimiento para notificar cambios significativos en las tendencias de networking o caídas en la calidad de los perfiles entrantes.
