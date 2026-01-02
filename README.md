@@ -5,6 +5,8 @@ Dada la extensión de los archivos utilizados no puedo subir los datasets comple
 
 Este proyecto presenta un Análisis Exploratorio de Datos (EDA) avanzado y un pipeline de Ingeniería de Datos aplicado a un dataset de redes profesionales de LinkedIn. El objetivo es desglosar las métricas de compatibilidad entre usuarios para identificar patrones de networking, brechas de habilidades y oportunidades estratégicas de mentoría, culminando en un entorno de visualización interactivo en Power BI.
 
+el archivo final para power BI: https://drive.google.com/file/d/1rsttacaY50L5WtqF0sGSQFS2MaEGiYJI/view?usp=drive_link  de acceso libre para su descarga, ya que teniendo má de 200mb no puedo subirlo a git hub
+
 #### 📊 Especificaciones Técnicas y Origen
 Los datos han sido obtenidos del LinkedIn Compatibility Dataset (50k profiles). Utilizando los archivos CSV que aparecen en el link ( compatibility_pairs.csv & profiles.csv)
 
