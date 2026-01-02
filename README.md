@@ -1,7 +1,7 @@
-#LinkedIn Professional Compatibility & Connectivity Analysis
+# LinkedIn Professional Compatibility & Connectivity Analysis
 
  Los datos se han extraído de: https://www.kaggle.com/datasets/likithagedipudi/linkedin-compatibility-dataset-50k-profiles
-
+Dada la extensión de los archivos utilizados no puedo subir los datasets completos, no obstante, dejo el código que se ha empleado para obtener cada uno de los datasets.
 
 Este proyecto presenta un Análisis Exploratorio de Datos (EDA) avanzado y un pipeline de Ingeniería de Datos aplicado a un dataset de redes profesionales de LinkedIn. El objetivo es desglosar las métricas de compatibilidad entre usuarios para identificar patrones de networking, brechas de habilidades y oportunidades estratégicas de mentoría, culminando en un entorno de visualización interactivo en Power BI.
 
@@ -20,7 +20,7 @@ A lo largo del proyecto, los datos han transitado por distintas etapas de madure
 compatibility_pairs.csv: archivo original de 1.1GB de tamaño que contiene millones de datos para corroborar con profiles.csv
 profiles.csv: Dataset original con la información biográfica bruta de 50,000 usuarios.
 
-muestra_eda.csv: Registro de 200,000 interacciones y métricas de compatibilidad entre pares de perfiles, creado a partir de compatibility_pairs.csv
+muestra_eda.csv: Registro de 200,000 interacciones y métricas de compatibilidad entre pares de perfiles, creado a partir de compatibility_pairs.csv ( obtenido en el link mencionado anteriormente)
 df = pd.read_csv('compatibility_pairs.csv')
 
 
@@ -31,7 +31,7 @@ df_muestra.to_csv('muestra_eda.csv', index=False)
 
 dataset_analisis_final.csv: Producto de la unión (Inner Join) de las fuentes originales (muestra_EDA.csv y profiles.csv) y la primera fase de limpieza de nulos y estandarización. Versión utilizada para el Análisis Exploratorio de Datos (EDA) en VS Code, con columnas renombradas a español profesional.
 
-dataset_final_powerbi.csv: Archivo definitivo optimizado con ingeniería de variables, redondeos estadísticos y codificación UTF-8-SIG para una visualización perfecta en Power BI.
+dataset_final_powerbi.csv: Archivo definitivo optimizado con ingeniería de variables, redondeos estadísticos y codificación UTF-8-SIG para una visualización perfecta en Power BI. ( veáse el código en cuadernos VSC)
 
 ## 🛠️ Metodología de Procesamiento
 #### 1. Integración de Datos (Data Merging)
@@ -136,7 +136,7 @@ Naturaleza Relacional: Un usuario único aparece múltiples veces porque se eval
 
 Homónimos Reales: En una muestra de 50,000 personas, existen IDs únicos distintos para nombres idénticos.
 
-Recomendación: En Power BI, utilice siempre DISTINCTCOUNT sobre profile_id para métricas de volumen poblacional.
+
 
 ## 📈 Análisis Exploratorio (EDA) y Visualizaciones Críticas
 #### A. Distribución de Densidad (KDE)
@@ -222,72 +222,74 @@ df.to_csv('dataset_final_powerbi.csv', index=False, encoding='utf-8-sig')
 
 ## Creación Dashboard en POWER BI
 
-se ha utilizado el archivo dataset_final_powerbi.csv para su escalada en powerBI y se ha decidido la creación de 3 dashboards analíticos.
+se ha utilizado el archivo dataset_final_powerbi.csv para su escalada en powerBI y se ha decidido la creación de 3 dashboards analíticos llamados HOME; DINÁMICA DE RED Y ANÁLISIS ESTRATÉGICO.
 
-La Página 1: Resumen Ejecutivo. Este panel transforma los datos técnicos en una herramienta de inteligencia de negocio interactiva.
+### Página 1: Resumen Ejecutivo. Este panel transforma los datos técnicos en una herramienta de inteligencia de negocio interactiva.
 
 ⚙️ Proceso de Implementación Técnica
-Refinamiento de Medidas (DAX): Se migraron los cálculos estadísticos de Python a Power BI mediante medidas dinámicas (Promedio de Compatibilidad, Mediana, Total de Pares y alineación de la comaptibilidad).
+-Refinamiento de Medidas (DAX): Se migraron los cálculos estadísticos de Python a Power BI mediante medidas dinámicas (Promedio de Compatibilidad, Mediana, Total de Pares y alineación de la comaptibilidad).
 
-Arquitectura de Visualización:
+-Arquitectura de Visualización:
 
-KPIs de Rendimiento: Monitoreo en tiempo real del estado general de la red profesional.
+-KPIs de Rendimiento: Monitoreo en tiempo real del estado general de la red profesional.
 
-Análisis de Distribución: Implementación de un histograma agrupado que permite identificar los segmentos de mayor volumen de compatibilidad.
+-Análisis de Distribución: Implementación de un histograma agrupado que permite identificar los segmentos de mayor volumen de compatibilidad.
 
-Segmentación de Carrera: Visualización de la jerarquía de compatibilidad por niveles de seniority (Junior a Experto).
+-Segmentación de Carrera: Visualización de la jerarquía de compatibilidad por niveles de seniority (Junior a Experto).
 
-Validación mediante Inteligencia Artificial: Se integró el visual de "Elementos Influyentes Clave", el cual utiliza Machine Learning para detectar automáticamente qué variables (Habilidades, Alineación de Carrera, Brecha de Experiencia, Geografíametcétera) tienen mayor peso en el incremento de la compatibilidad profesional.
+-Validación mediante Inteligencia Artificial: Se integró el visual de "Elementos Influyentes Clave", el cual utiliza Machine Learning para detectar automáticamente qué variables (Habilidades, Alineación de Carrera, Brecha de Experiencia, Geografíametcétera) tienen mayor peso en el incremento de la compatibilidad profesional.
 
-Interactividad Avanzada: Incorporación de segmentadores (Slicers) por Industria y Modalidad de Trabajo, permitiendo un filtrado cruzado de todo el informe.
+-Interactividad Avanzada: Incorporación de segmentadores (Slicers) por Industria y Modalidad de Trabajo, permitiendo un filtrado cruzado de todo el informe.
 
-💡 Hallazgos Críticos (Página 1-HOME)
-El Factor Dominante: La Coincidencia de Habilidades Técnicas se confirma como el motor principal del sistema, superando a factores demográficos o de ubicación.
+ 💡 Hallazgos Críticos (Página 1-HOME)
+-El Factor Dominante: La Coincidencia de Habilidades Técnicas se confirma como el motor principal del sistema, superando a factores demográficos o de ubicación.
 
-Umbrales de Éxito: El análisis de IA identifica que poseer un perfil "versátil" (más de 10 habilidades registradas) actúa como un catalizador, elevando significativamente el promedio de compatibilidad individual.
+-Umbrales de Éxito: El análisis de IA identifica que poseer un perfil "versátil" (más de 10 habilidades registradas) actúa como un catalizador, elevando significativamente el promedio de compatibilidad individual.
 
-Correlación de Seniority: Se observa una tendencia lineal ascendente donde la compatibilidad media aumenta proporcionalmente a los años de experiencia, validando el modelo de crecimiento orgánico de la red.
+-Correlación de Seniority: Se observa una tendencia lineal ascendente donde la compatibilidad media aumenta proporcionalmente a los años de experiencia, validando el modelo de crecimiento orgánico de la red.
 
-Escala de Puntuación: Se ha clarificado que el modelo opera bajo una escala acumulativa en el índice total de compatibilidad , alejándose de los modelos porcentuales tradicionales para ofrecer un detalle más granular del valor técnico.
+-Escala de Puntuación: Se ha clarificado que el modelo opera bajo una escala acumulativa en el índice total de compatibilidad , alejándose de los modelos porcentuales tradicionales para ofrecer un detalle más granular del valor técnico.
 
-Página 2: Análisis Cualitativo y Dinámica de la Red
+### Página 2: Análisis Cualitativo y Dinámica de la Red
 Esta segunda fase del dashboard se centra en la anatomía técnica de la red y el intercambio de valor entre los usuarios, transformando listas de habilidades en métricas de densidad de talento.
 
 ⚙️ Proceso de Implementación Técnica
-Normalización de Competencias: Se realizó un proceso de tokenización en Power Query para desglosar cadenas de texto complejas en habilidades individuales, permitiendo un análisis atómico de cada tecnología.
+-Normalización de Competencias: Se realizó un proceso de tokenización en Power Query para desglosar cadenas de texto complejas en habilidades individuales, permitiendo un análisis atómico de cada tecnología.
 
-Mapeo de Densidad Global: Implementación de un visual geográfico para identificar polos de talento y niveles de compatibilidad por estado y provincia.
+-Mapeo de Densidad Global: Implementación de un visual geográfico para identificar polos de talento y niveles de compatibilidad por estado y provincia.
 
-Análisis de Correlación de Versatilidad: Creación de un gráfico de dispersión con línea de tendencia para validar la relación entre la cantidad de habilidades poseídas y el índice de compatibilidad total.
+-Análisis de Correlación de Versatilidad: Creación de un gráfico de dispersión con línea de tendencia para validar la relación entre la cantidad de habilidades poseídas y el índice de compatibilidad total.
 
-Matriz de Intercambio de Valor: Configuración de una matriz con formato condicional (Heatmap) para detectar los nodos con mayor volumen de coincidencia entre necesidades de networking y propuestas de valor.
+-Matriz de Intercambio de Valor: Configuración de una matriz con formato condicional (Heatmap) para detectar los nodos con mayor volumen de coincidencia entre necesidades de networking y propuestas de valor.
 
 💡 Hallazgos Críticos (Página 2)
-Dominancia del Stack Técnico: El lenguaje C se identifica como la competencia líder en la red con cerca de 100,000 registros, seguido por perfiles especializados en Data Science y Google Cloud.
+-Dominancia del Stack Técnico: El lenguaje C se identifica como la competencia líder en la red con cerca de 100,000 registros, seguido por perfiles especializados en Data Science y Google Cloud.
 
-Ley de Versatilidad: Se confirma una correlación positiva directa: a mayor número de habilidades técnicas, el Índice de Compatibilidad Total tiende a subir, premiando los perfiles multidisciplinarios.
+-Ley de Versatilidad: Se confirma una correlación positiva directa: a mayor número de habilidades técnicas, el Índice de Compatibilidad Total tiende a subir, premiando los perfiles multidisciplinarios.
 
-Nodos de Conexión: Se detectaron puntos críticos de intercambio con hasta 137 pares simultáneos en nichos de consultoría técnica y conexiones de red profesional.
+-Nodos de Conexión: Se detectaron puntos críticos de intercambio con hasta 137 pares simultáneos en nichos de consultoría técnica y conexiones de red profesional.
 
 
-Página 3: Perspectiva Estratégica y Calidad de Conexión
+### Página 3: Perspectiva Estratégica y Calidad de Conexión
 La fase final del reporte consolida la visión de negocio, evaluando la calidad de las conexiones según factores estructurales como la industria y la modalidad de trabajo.
 
 ⚙️ Proceso de Implementación Técnica
-Benchmarking Sectorial: Creación de comparativas de rendimiento por industria utilizando medias de compatibilidad ponderadas.
 
-Análisis de Mediana por Modalidad: Implementación de visuales comparativos para determinar la eficacia de los entornos Remote, Onsite e Hybrid.
+-Benchmarking Sectorial: Creación de comparativas de rendimiento por industria utilizando medias de compatibilidad ponderadas.
 
-Integración de Narrativa Inteligente: Inclusión de un motor de IA que genera resúmenes ejecutivos automáticos basados en las fluctuaciones de los datos en tiempo real.
+-Análisis de Mediana por Modalidad: Implementación de visuales comparativos para determinar la eficacia de los entornos Remote, Onsite e Hybrid.
 
-Optimización de UX: Diseño de un sistema de navegación mediante botones interactivos y segmentadores sincronizados entre todas las páginas del informe.
+-Integración de Narrativa Inteligente: Inclusión de un motor de IA que genera resúmenes ejecutivos automáticos basados en las fluctuaciones de los datos en tiempo real.
+
+-Optimización de UX: Diseño de un sistema de navegación mediante botones interactivos y segmentadores sincronizados entre todas las páginas del informe.
 
 💡 Hallazgos Críticos (Página 3)
-Sectores de Alto Rendimiento: La industria de Finance lidera la red con una media de compatibilidad de 3436,3, seguida muy de cerca por Retail (3431,0) y Transportation (3430,1).
 
-Eficacia del Trabajo Remoto: Los datos demuestran que la modalidad Remote obtiene una mediana de compatibilidad superior, sugiriendo que la flexibilidad geográfica favorece mejores matches técnicos.
+-Sectores de Alto Rendimiento: La industria de Finance lidera la red con una media de compatibilidad de 3436,3, seguida muy de cerca por Retail (3431,0) y Transportation (3430,1).
 
-Madurez de la Red: Los perfiles de nivel Expert (10+) y Senior (6-10) presentan los índices de alineación más sólidos, validando el valor de la experiencia acumulada en la red de networking.
+-Eficacia del Trabajo Remoto: Los datos demuestran que la modalidad Remote obtiene una mediana de compatibilidad superior, sugiriendo que la flexibilidad geográfica favorece mejores matches técnicos.
+
+-Madurez de la Red: Los perfiles de nivel Expert (10+) y Senior (6-10) presentan los índices de alineación más sólidos, validando el valor de la experiencia acumulada en la red de networking.
 
 
 ## 🚀 Conclusiones Finales
