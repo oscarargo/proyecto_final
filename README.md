@@ -380,7 +380,7 @@ El análisis de la brecha de experiencia ( diferencia de años entre los perfile
 
 Los análisis de frecuencia de las columnas de texto revelan:
 
-- Una fuerte inclinación hacia perfiles tecnológicos con una base de programación fundamental y enfoque en análisis de datos ( programación C, data science, numpy...)
+- Una fuerte inclinación hacia perfiles tecnológicos con una base de programación fundamental y enfoque en análisis de datos ( programación C, data science, numpy...). Se observan variaciones marginales en los puestos finales del Top 10 entre el EDA y el Dashboard debido al tratamiento de espacios en blanco y la limpieza de nulos realizada en Power Query para optimizar la visualización.
 
 - Equilibrio entre el deseo de maestría técnica y ambición de liderazgo ( palabras como specialize, learn new skills, executive position...)
 
