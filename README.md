@@ -5,7 +5,7 @@ Dada la extensión de los archivos utilizados no puedo subir los datasets comple
 
 Este proyecto presenta un Análisis Exploratorio de Datos (EDA) avanzado y un pipeline de Ingeniería de Datos aplicado a un dataset de redes profesionales de LinkedIn. El objetivo es desglosar las métricas de compatibilidad entre usuarios para identificar patrones de networking, brechas de habilidades y oportunidades estratégicas de mentoría, culminando en un entorno de visualización interactivo en Power BI.
 
-el archivo final para power BI: https://drive.google.com/file/d/1rsttacaY50L5WtqF0sGSQFS2MaEGiYJI/view?usp=drive_link  de acceso libre para su descarga, ya que teniendo má de 200mb no puedo subirlo a git hub
+el archivo final para power BI: https://drive.google.com/file/d/1rsttacaY50L5WtqF0sGSQFS2MaEGiYJI/view?usp=drive_link  de acceso libre para su descarga, ya que teniendo más de 200mb no puedo subirlo a git hub
 
 #### 📊 Especificaciones Técnicas y Origen
 Los datos han sido obtenidos del LinkedIn Compatibility Dataset (50k profiles). Utilizando los archivos CSV que aparecen en el link ( compatibility_pairs.csv & profiles.csv)
@@ -221,6 +221,7 @@ df['Conexiones'] = df['Conexiones'].fillna(0).astype(int)
 
 df.to_csv('dataset_final_powerbi.csv', index=False, encoding='utf-8-sig')
 
+https://drive.google.com/file/d/1rsttacaY50L5WtqF0sGSQFS2MaEGiYJI/view?usp=drive_link 
 
 ## Creación Dashboard en POWER BI
 
@@ -252,6 +253,9 @@ se ha utilizado el archivo dataset_final_powerbi.csv para su escalada en powerBI
 
 -Escala de Puntuación: Se ha clarificado que el modelo opera bajo una escala acumulativa en el índice total de compatibilidad , alejándose de los modelos porcentuales tradicionales para ofrecer un detalle más granular del valor técnico.
 
+<img width="1327" height="735" alt="image" src="https://github.com/user-attachments/assets/cf957fb7-6e46-442b-8e9d-82b04f5eec80" />
+
+
 ### Página 2: Análisis Cualitativo y Dinámica de la Red
 Esta segunda fase del dashboard se centra en la anatomía técnica de la red y el intercambio de valor entre los usuarios, transformando listas de habilidades en métricas de densidad de talento.
 
@@ -270,6 +274,8 @@ Esta segunda fase del dashboard se centra en la anatomía técnica de la red y e
 -Ley de Versatilidad: Se confirma una correlación positiva directa: a mayor número de habilidades técnicas, el Índice de Compatibilidad Total tiende a subir, premiando los perfiles multidisciplinarios.
 
 -Nodos de Conexión: Se detectaron puntos críticos de intercambio con hasta 137 pares simultáneos en nichos de consultoría técnica y conexiones de red profesional.
+
+<img width="1301" height="728" alt="image" src="https://github.com/user-attachments/assets/d8dadf8f-946a-4639-a653-6ecddb5cae95" />
 
 
 ### Página 3: Perspectiva Estratégica y Calidad de Conexión
@@ -292,6 +298,8 @@ La fase final del reporte consolida la visión de negocio, evaluando la calidad 
 -Eficacia del Trabajo Remoto: Los datos demuestran que la modalidad Remote obtiene una mediana de compatibilidad superior, sugiriendo que la flexibilidad geográfica favorece mejores matches técnicos.
 
 -Madurez de la Red: Los perfiles de nivel Expert (10+) y Senior (6-10) presentan los índices de alineación más sólidos, validando el valor de la experiencia acumulada en la red de networking.
+
+<img width="1301" height="723" alt="image" src="https://github.com/user-attachments/assets/6bf42ed4-17dc-42f5-86cf-8b96a92a54cc" />
 
 
 ## 🚀 Conclusiones Finales
